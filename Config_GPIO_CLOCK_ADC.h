@@ -51,25 +51,7 @@ void gpio_config(void)
 
 
 
-void ADC_config_ch9_ch11_ch13(void)
-{
 
-     // Turn on ADC14, extend sampling time to avoid overflow of results
-       ADC14->CTL0 = ADC14_CTL0_ON |ADC14_CTL0_MSC|ADC14_CTL0_SHT1__192 |ADC14_CTL0_SHP |ADC14_CTL0_CONSEQ_1;
-
-       ADC14->MCTL[9]  = ADC14_MCTLN_INCH_9;                    // ref+=AVcc, channel = A9
-       ADC14->MCTL[11] = ADC14_MCTLN_INCH_11;                   // ref+=AVcc, channel = A11
-       ADC14->MCTL[13] = ADC14_MCTLN_INCH_13|ADC14_MCTLN_EOS;   // ref+=AVcc, channel = A13, end seq.
-       // Enable ADC14IFG.3
-       ADC14->IER0 |= ADC14_IER0_IE9;
-       ADC14->IER0 |= ADC14_IER0_IE11;
-       ADC14->IER0 |= ADC14_IER0_IE13;
-       // Enable global interrupt
-     /////  __enable_irq();
-      // Enable ADC interrupt in NVIC module
-   /////    NVIC->ISER[0] |= 1 << ((ADC14_IRQn) & 31);
-
-}
 
 
 
@@ -79,10 +61,7 @@ void enable_IRQ(void)
     // Enable global interrupt
         __enable_irq();
 
-        // Enable eUSCIA2 interrupt in NVIC module
-        NVIC->ISER[0] |= 1 << ((EUSCIA2_IRQn) & 31);
 
-        NVIC->ISER[0] |= 1 << ((ADC14_IRQn) & 31);// ADC
 
 
         NVIC->ISER[0] |= 1 << ((T32_INT1_IRQn) & 31); //timer
