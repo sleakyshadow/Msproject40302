@@ -57,7 +57,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
-
+//Testing
 /* Top of bank one where we will initiate the release */
 #define FLASH_ERASE_LOCATION 0x20000
 
